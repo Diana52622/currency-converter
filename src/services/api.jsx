@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const apiKey = 'b4eb85a13e7364c146c2e57b';
-const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
 
 export const fetchCurrencies = async () => {
   const cachedRates = localStorage.getItem('exchangeRates');
