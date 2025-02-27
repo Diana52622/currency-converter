@@ -2,12 +2,16 @@ import React from 'react';
 import './main.css'; 
 
 const RatesTable = ({ rates, favorites, toggleFavorite, showAll }) => {
-  const sortedRates = Object.entries(rates).sort(([currencyA], [currencyB]) => {
-    const isAFavorite = favorites.includes(currencyA);
-    const isBFavorite = favorites.includes(currencyB);
+  const sortedRates = Object.entries(rates).sort(
+    ([keyA], [keyB]) => {
+    const isAFavorite = favorites.includes(keyA);
+    const isBFavorite = favorites.includes(keyB);
     return isAFavorite === isBFavorite ? 0 : isAFavorite ? -1 : 1;
   });
 
+  const countShow = showAll ? sortedRates.length : 10
+  const currenciesShow = sortedRates.slice(0, countShow)
+  
   return (
     <table className="table">
       <thead>
@@ -18,7 +22,7 @@ const RatesTable = ({ rates, favorites, toggleFavorite, showAll }) => {
         </tr>
       </thead>
       <tbody>
-        {sortedRates.slice(0, showAll ? sortedRates.length : 10).map(([currency, rate]) => (
+        { currenciesShow.map(([currency, rate]) => (
           <tr key={currency}>
             <td>{currency}</td>
             <td>{rate}</td>
