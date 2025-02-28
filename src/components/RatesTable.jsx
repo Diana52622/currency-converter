@@ -2,11 +2,17 @@ import React from 'react';
 import './main.css'; 
 
 const RatesTable = ({ rates, favorites, toggleFavorite, showAll }) => {
-  const sortedRates = Object.entries(rates).sort(
-    ([keyA], [keyB]) => {
+  const sortedRates = Object.entries(rates).sort((a, b) => {
+    const [keyA] = a;
+    const [keyB] = b;
+
     const isAFavorite = favorites.includes(keyA);
     const isBFavorite = favorites.includes(keyB);
-    return isAFavorite === isBFavorite ? 0 : isAFavorite ? -1 : 1;
+
+    if (isAFavorite && !isBFavorite) return -1;
+    if (!isAFavorite && isBFavorite) return 1;
+
+    return 0;
   });
 
   const countShow = showAll ? sortedRates.length : 10
