@@ -9,16 +9,16 @@ const PageExchangeRates = () => {
   const [favorites, setFavorites] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const ratesData = await fetchCurrencies();
-        setRates(ratesData);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const ratesData = await fetchCurrencies();
+      setRates(ratesData);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
